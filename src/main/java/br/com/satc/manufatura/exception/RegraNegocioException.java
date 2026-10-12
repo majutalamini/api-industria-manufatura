@@ -1,0 +1,8 @@
+package br.com.satc.manufatura.exception;
+
+public class RegraNegocioException extends RuntimeException {
+
+    public RegraNegocioException(String mensagem) {
+        super(mensagem);
+    }
+}

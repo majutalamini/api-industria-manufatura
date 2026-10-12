@@ -30,6 +30,9 @@ public class Operador {
     @Column(nullable = false, length = 100)
     private String nome;
 
+    @Column(nullable = false, unique = true, length = 20)
+    private String matricula;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private TurnoOperador turno;

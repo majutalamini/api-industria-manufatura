@@ -83,11 +83,13 @@ Atributos, tipos e o diagrama das tabelas estão em [docs/modelo-de-dominio.md](
 
 ### As que já funcionam
 
-{{A preencher quando o código estiver pronto.}}
-
 | Verbo | Caminho | O que faz | Regra | Sucesso | Erros |
 |---|---|---|---|---|---|
-| | | | | | |
+| `POST` | `/maquinas` | Cadastra uma máquina (começa `DISPONIVEL`) | Nenhuma | `201` | `400` |
+| `GET` | `/maquinas` | Lista as máquinas | Nenhuma | `200` | — |
+| `GET` | `/maquinas/{id}` | Busca uma máquina pelo id | Nenhuma | `200` | `404` |
+| `POST` | `/ordens-producao` | Abre uma ordem de produção | R1 e R2 | `201` | `400`, `404` |
+| `PATCH` | `/ordens-producao/{id}/finalizar` | Finaliza a ordem com as quantidades produzida e com defeito | R3 | `200` | `400`, `404` |
 
 ### Erros
 
@@ -112,11 +114,6 @@ Estão no contrato, mas ainda não respondem.
 
 | Verbo | Caminho | O que vai fazer | Regra | Sucesso | Erros |
 |---|---|---|---|---|---|
-| `POST` | `/maquinas` | Cadastra uma máquina (começa `DISPONIVEL`) | Nenhuma | `201` | `400` |
-| `GET` | `/maquinas` | Lista as máquinas | Nenhuma | `200` | — |
-| `GET` | `/maquinas/{id}` | Busca uma máquina pelo id | Nenhuma | `200` | `404` |
-| `POST` | `/ordens-producao` | Abre uma ordem de produção | R1 e R2 | `201` | `400`, `404` |
-| `PATCH` | `/ordens-producao/{id}/finalizar` | Finaliza a ordem com as quantidades produzida e com defeito | R1 e R3 | `200` | `400`, `404` |
 | — | `/operadores` | Cadastro e consulta de operadores (próximas etapas) | — | — | — |
 | — | `/maquinas/{id}/liberar` | Tira a máquina da manutenção (próximas etapas) | — | — | — |
 
@@ -124,17 +121,23 @@ O contrato completo, com todas as rotas e os DTOs, está em [docs/contrato-da-ap
 
 ## Como executar
 
-{{A preencher quando o código estiver pronto.}}
+```powershell
+docker compose up -d      # sobe o PostgreSQL
+mvn spring-boot:run       # inicia a API (Flyway cria as tabelas)
+mvn test                  # testes das regras R1, R2 e R3
+```
+
+Swagger UI: http://localhost:8080/swagger-ui.html
 
 ## Situação do projeto
 
 | Parte | Situação |
 |---|---|
 | Desenho | Problema e regras definidos neste README |
-| Estrutura | {{A preencher}} |
-| API e regras | {{A preencher}} |
+| Estrutura | Camadas, entidades e migrations V1 a V3 prontas |
+| API e regras | Rotas de `/maquinas` e `/ordens-producao` com R1, R2 e R3, mais testes unitários das regras |
 
-**Ainda não funciona:** {{A preencher}}
+**Ainda não funciona:** rotas de `/operadores` e `/maquinas/{id}/liberar`.
 
 ## Documentação
 
