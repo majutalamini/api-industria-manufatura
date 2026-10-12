@@ -20,7 +20,7 @@ Projeto Final da disciplina de Backend (Engenharia de Software, SATC). **Etapa 1
 
 | Nome | GitHub |
 |---|---|
-| Maria Julia Talamini | [@{{majutalamini}}](https://github.com/{{majutalamini}}) |
+| Maria Julia Talamini | [@{{majutalamini}}](https://github.com/majutalamini) |
 | Lorraini Vieira | [@{{lorraini-vieira-costa}}](https://github.com/{{lorraini-vieira-costa}}) |
 | Gabriel Meurer | [@{{GabrielMeurer001}}](https://github.com/{{GabrielMeurer001}}) |
 
