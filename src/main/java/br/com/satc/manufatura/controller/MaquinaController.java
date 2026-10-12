@@ -17,6 +17,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * Expõe os endpoints HTTP para cadastro e consulta de máquinas.
+ *
+ * A lógica de negócio fica na camada de serviço, mantendo este controller responsável pela comunicação HTTP 
+ * e pela organização das respostas da API.
+ */
 @RestController
 @RequestMapping("/maquinas")
 @RequiredArgsConstructor

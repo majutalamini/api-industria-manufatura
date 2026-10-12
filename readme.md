@@ -146,3 +146,5 @@ Swagger UI: http://localhost:8080/swagger-ui.html
 | [Modelo de domínio](docs/modelo-de-dominio.md) | Entidades, relacionamentos, diagrama das tabelas, migrations |
 | [Contrato da API](docs/contrato-da-api.md) | Todas as rotas, os DTOs, exemplos de JSON e erros |
 | [Autoavaliação](docs/autoavaliacao.md) | Os critérios da revisão do código, marcados pelo grupo |
+
+| [Como usar o Docker](docs/como-usar-docker.md) | Instalação necessária, inicialização do PostgreSQL, execução da API e solução de problemas comuns |

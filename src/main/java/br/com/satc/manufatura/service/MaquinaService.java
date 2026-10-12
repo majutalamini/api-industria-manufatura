@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Descrição: Contém as operações e regras relacionadas a máquinas, mantendo controller e persistência separados.
+ */
 @Service
 @RequiredArgsConstructor
 public class MaquinaService {

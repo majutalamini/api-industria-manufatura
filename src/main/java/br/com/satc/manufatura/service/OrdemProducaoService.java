@@ -20,10 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
+/**
+ * Descrição: Contém as regras centrais do fluxo de ordens de produção, incluindo disponibilidade de máquina e limite de defeitos.
+ */
 @Service
 @RequiredArgsConstructor
 public class OrdemProducaoService {
 
+    // Acima de 10% de peças defeituosas, a ordem é reprovada e a máquina vai para manutenção.
     private static final double LIMITE_DEFEITO = 0.10;
 
     private final OrdemProducaoRepository ordemRepository;
@@ -47,6 +51,7 @@ public class OrdemProducaoService {
             throw new RegraNegocioException("R2: o operador já possui uma ordem em andamento");
         }
 
+        // Reserva a máquina para esta ordem antes de salvar a ordem de produção.
         maquina.setStatus(StatusMaquina.EM_PRODUCAO);
         maquinaRepository.save(maquina);
 
@@ -66,12 +71,14 @@ public class OrdemProducaoService {
             throw new RegraNegocioException("A quantidade com defeito não pode ser maior que a produzida");
         }
 
+        // Registra os resultados informados e o instante em que a ordem foi encerrada.
         ordem.setQuantidadeProduzida(dto.quantidadeProduzida());
         ordem.setQuantidadeDefeito(dto.quantidadeDefeito());
         ordem.setDataFim(LocalDateTime.now());
 
         // R3: defeito acima de 10% reprova a ordem e manda a máquina para manutenção
         Maquina maquina = ordem.getMaquina();
+        // A comparação é estrita: exatamente 10% de defeitos ainda não ultrapassa o limite.
         if (dto.quantidadeDefeito() > dto.quantidadeProduzida() * LIMITE_DEFEITO) {
             ordem.setStatus(StatusOrdemProducao.REPROVADA);
             maquina.setStatus(StatusMaquina.EM_MANUTENCAO);

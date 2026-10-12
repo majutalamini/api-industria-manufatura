@@ -14,6 +14,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Representa uma máquina do sistema e seu mapeamento para a tabela "maquinas".
+ *
+ * As anotações JPA definem como os dados são persistidos, enquanto o Lombok reduz a necessidade de métodos e 
+ * construtores escritos manualmente.
+ */
 @Entity
 @Table(name = "maquinas")
 @Getter
@@ -27,15 +33,19 @@ public class Maquina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // O código é obrigatório e único para permitir a identificação de cada máquina sem duplicidades no banco de dados.
     @Column(nullable = false, unique = true, length = 20)
     private String codigo;
 
+    // Define o nome da máquina, que deve ser informado e respeitar o limite de 100 caracteres no banco.
     @Column(nullable = false, length = 100)
     private String nome;
 
+    // Armazena o setor ao qual a máquina pertence, com limite de 50 caracteres e sem permitir valor nulo.
     @Column(nullable = false, length = 50)
     private String setor;
 
+    // Armazena o status como texto no banco, em vez de usar a posição numérica do valor no enum.
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     @Builder.Default

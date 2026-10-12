@@ -17,6 +17,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+/**
+ * Expõe os endpoints HTTP para abertura e finalização de ordens de produção.
+ *
+ * A lógica de negócio fica na camada de serviço, mantendo o controller responsável por receber as requisições 
+ * e organizar as respostas da API.
+ */
 @RestController
 @RequestMapping("/ordens-producao")
 @RequiredArgsConstructor
