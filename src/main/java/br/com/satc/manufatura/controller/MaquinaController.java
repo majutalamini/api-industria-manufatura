@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,5 +46,10 @@ public class MaquinaController {
     @GetMapping("/{id}")
     public ResponseEntity<MaquinaResponseDTO> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(maquinaService.buscarPorId(id));
+    }
+
+    @PatchMapping("/{id}/liberar")
+    public ResponseEntity<MaquinaResponseDTO> liberar(@PathVariable Long id) {
+        return ResponseEntity.ok(maquinaService.liberar(id));
     }
 }

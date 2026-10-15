@@ -3,6 +3,7 @@ package br.com.satc.manufatura.service;
 import br.com.satc.manufatura.dto.MaquinaRequestDTO;
 import br.com.satc.manufatura.dto.MaquinaResponseDTO;
 import br.com.satc.manufatura.entity.Maquina;
+import br.com.satc.manufatura.entity.StatusMaquina;
 import br.com.satc.manufatura.exception.RecursoNaoEncontradoException;
 import br.com.satc.manufatura.exception.RegraNegocioException;
 import br.com.satc.manufatura.mapper.MaquinaMapper;
@@ -42,6 +43,19 @@ public class MaquinaService {
     public MaquinaResponseDTO buscarPorId(Long id) {
         Maquina maquina = maquinaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Máquina não encontrada: " + id));
+        return maquinaMapper.toResponseDTO(maquina);
+    }
+
+    @Transactional
+    public MaquinaResponseDTO liberar(Long id) {
+        Maquina maquina = maquinaRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Máquina não encontrada: " + id));
+
+        if (maquina.getStatus() != StatusMaquina.EM_MANUTENCAO) {
+            throw new RegraNegocioException("A máquina não está em manutenção");
+        }
+
+        maquina.setStatus(StatusMaquina.DISPONIVEL);
         return maquinaMapper.toResponseDTO(maquina);
     }
 }

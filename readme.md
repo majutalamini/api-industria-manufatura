@@ -88,6 +88,10 @@ Atributos, tipos e o diagrama das tabelas estão em [docs/modelo-de-dominio.md](
 | `POST` | `/maquinas` | Cadastra uma máquina (começa `DISPONIVEL`) | Nenhuma | `201` | `400` |
 | `GET` | `/maquinas` | Lista as máquinas | Nenhuma | `200` | — |
 | `GET` | `/maquinas/{id}` | Busca uma máquina pelo id | Nenhuma | `200` | `404` |
+| `PATCH` | `/maquinas/{id}/liberar` | Tira a máquina da manutenção (volta para `DISPONIVEL`) | Máquina deve estar em manutenção | `200` | `400`, `404` |
+| `POST` | `/operadores` | Cadastra um operador | Nenhuma | `201` | `400` |
+| `GET` | `/operadores` | Lista os operadores | Nenhuma | `200` | — |
+| `GET` | `/operadores/{id}` | Busca um operador pelo id | Nenhuma | `200` | `404` |
 | `POST` | `/ordens-producao` | Abre uma ordem de produção | R1 e R2 | `201` | `400`, `404` |
 | `PATCH` | `/ordens-producao/{id}/finalizar` | Finaliza a ordem com as quantidades produzida e com defeito | R3 | `200` | `400`, `404` |
 
@@ -110,12 +114,7 @@ Um campo inválido também devolve `400`, com a lista `campos` dizendo qual camp
 
 ### As planejadas
 
-Estão no contrato, mas ainda não respondem.
-
-| Verbo | Caminho | O que vai fazer | Regra | Sucesso | Erros |
-|---|---|---|---|---|---|
-| — | `/operadores` | Cadastro e consulta de operadores (próximas etapas) | — | — | — |
-| — | `/maquinas/{id}/liberar` | Tira a máquina da manutenção (próximas etapas) | — | — | — |
+Todas as rotas previstas foram implementadas.
 
 O contrato completo, com todas as rotas e os DTOs, está em [docs/contrato-da-api.md](docs/contrato-da-api.md).
 
@@ -135,9 +134,9 @@ Swagger UI: http://localhost:8080/swagger-ui.html
 |---|---|
 | Desenho | Problema e regras definidos neste README |
 | Estrutura | Camadas, entidades e migrations V1 a V3 prontas |
-| API e regras | Rotas de `/maquinas` e `/ordens-producao` com R1, R2 e R3, mais testes unitários das regras |
+| API e regras | Rotas de `/maquinas`, `/operadores` e `/ordens-producao` com R1, R2 e R3, mais testes unitários das regras |
 
-**Ainda não funciona:** rotas de `/operadores` e `/maquinas/{id}/liberar`.
+**Todas as rotas estão funcionando.**
 
 ## Documentação
 

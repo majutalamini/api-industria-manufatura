@@ -10,4 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * escrever consultas manualmente para as operações básicas.
  */
 public interface OperadorRepository extends JpaRepository<Operador, Long> {
+
+    // Verifica se já existe um operador cadastrado com a matrícula informada.
+    boolean existsByMatricula(String matricula);
 }
